@@ -1,12 +1,18 @@
-# 干净克隆时的默认配置。
-# 个人的 Wi-Fi 密码等私密配置请写在 sdkconfig 里（它已被 .gitignore 忽略），
-# 或者直接跑 `idf.py menuconfig`。
+# Default configuration applied on a fresh clone.
+#
+# IMPORTANT: keep this file ASCII-only. kconfgen parses it with the system
+# locale codec, so on a Windows machine running a non-UTF-8 codepage (GBK,
+# Shift-JIS, ...) any multibyte character makes the build die with a
+# UnicodeDecodeError before compilation even starts.
+#
+# Your personal settings (Wi-Fi password and friends) belong in sdkconfig,
+# which is gitignored. Or just run `idf.py menuconfig`.
 
-# 目标芯片
+# Target chip
 CONFIG_IDF_TARGET="esp32s3"
 
-# ESP32-S3-DevKitC-1 N16R8 是 16MB Flash。
-# 不写这行 IDF 默认按 2MB 处理，分区表会放不下。
-# 换板子的话把这里和下面一行一起改掉。
+# ESP32-S3-DevKitC-1 N16R8 has 16MB of flash.
+# Without this IDF assumes 2MB and the partition table will not fit.
+# Change both lines together when using a different board.
 CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
 CONFIG_ESPTOOLPY_FLASHSIZE="16MB"

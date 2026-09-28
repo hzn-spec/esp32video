@@ -174,6 +174,42 @@ esp_wifi_set_ps(WIFI_PS_NONE);
 `Image.convert("1")` 默认走 Floyd–Steinberg。单色小屏上，
 照片类画面有没有抖动是天壤之别，暗场景尤其明显。
 
+### 5. `sdkconfig.defaults` 里不能写非 ASCII 字符
+
+这个坑是发布仓库时才发现的，而且很隐蔽。
+
+`sdkconfig.defaults` 由 kconfgen 解析，而 kconfgen 用的是**系统区域编码**。
+在中文 Windows（GBK）上，文件里任何一个中文注释都会让构建在配置阶段就挂掉，
+根本进不到编译：
+
+```
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xae in position 24
+CMake Error at tools/cmake/kconfig.cmake:209 (message):
+  Failed to run kconfgen
+```
+
+**Kconfig 解析链上的文件（`sdkconfig.defaults`、`Kconfig`、`Kconfig.projbuild`）
+请保持纯 ASCII。** README 这类文档不受影响，随便写中文。
+
+## 疑难杂症
+
+### 编译报 internal compiler error
+
+如果碰到这种，不是你的代码问题：
+
+```
+esp_lcd_panel_rgb.c:686:1: internal compiler error: Segmentation fault
+```
+
+先关掉 ccache 再试，一般就好了：
+
+```powershell
+$env:CCACHE_DISABLE = "1"
+idf.py build
+```
+
+ccache 在 Windows + xtensa-gcc 上偶发会触发编译器崩溃，与项目代码无关。
+
 ## 想再快一点
 
 瓶颈是 I2C 时钟。`VIDEO_I2C_HZ` 从 `400000` 提到 `1000000`，
