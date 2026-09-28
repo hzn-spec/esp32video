@@ -1,0 +1,22 @@
+# ESP-IDF 生成物：绝对不要提交
+build/
+sdkconfig
+sdkconfig.old
+managed_components/
+dependencies.lock
+
+# 编辑器 / IDE
+.vscode/
+*.code-workspace
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 系统
+Thumbs.db
+.DS_Store
+desktop.ini

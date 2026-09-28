@@ -1,0 +1,12 @@
+# 干净克隆时的默认配置。
+# 个人的 Wi-Fi 密码等私密配置请写在 sdkconfig 里（它已被 .gitignore 忽略），
+# 或者直接跑 `idf.py menuconfig`。
+
+# 目标芯片
+CONFIG_IDF_TARGET="esp32s3"
+
+# ESP32-S3-DevKitC-1 N16R8 是 16MB Flash。
+# 不写这行 IDF 默认按 2MB 处理，分区表会放不下。
+# 换板子的话把这里和下面一行一起改掉。
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="16MB"

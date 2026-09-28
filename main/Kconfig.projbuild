@@ -1,0 +1,44 @@
+menu "Video Player Configuration"
+
+    config WIFI_SSID
+        string "Wi-Fi SSID"
+        default "your-wifi-ssid"
+        help
+            The SSID of the Wi-Fi network to connect to.
+            Set this before flashing, or run `idf.py menuconfig`.
+
+    config WIFI_PASSWORD
+        string "Wi-Fi password"
+        default "your-wifi-password"
+        help
+            Leave empty for an open network.
+
+    config VIDEO_STREAM_PORT
+        int "TCP video stream port"
+        default 8888
+        help
+            The PC sender connects to this port and pushes 1bpp frames.
+
+    config VIDEO_SDA_GPIO
+        int "OLED SDA GPIO"
+        default 4
+
+    config VIDEO_SCL_GPIO
+        int "OLED SCL GPIO"
+        default 5
+
+    config VIDEO_I2C_HZ
+        int "OLED I2C clock (Hz)"
+        default 400000
+        help
+            400000 gives roughly 35 fps. If your module is happy with it,
+            1000000 roughly doubles that.
+
+    config VIDEO_ALLOW_SWAP
+        bool "Auto swap SDA/SCL when the panel is not found"
+        default y
+        help
+            Try the swapped pin order once before giving up. Handy when the
+            two signal wires are crossed.
+
+endmenu
