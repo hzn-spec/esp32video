@@ -219,4 +219,4 @@ ccache 在 Windows + xtensa-gcc 上偶发会触发编译器崩溃，与项目代
 
 ## 许可
 
-[MIT License](LICENSE) © 2026 何震柠 —— 随便用，包括商用，保留版权声明即可。
+[MIT License](LICENSE) © 2026 hzn-spec —— 随便用，包括商用，保留版权声明即可。
